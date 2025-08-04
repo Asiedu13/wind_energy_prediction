@@ -16,7 +16,7 @@ export function Predictor() {
       const file = files[0];
       setSelectedFile(event.target.files?.[0] || null);
       console.log(selectedFile);
-      console.log(event.target.files[0])
+      console.log(event.target.files?.[0] || null)
     }
   };
 
