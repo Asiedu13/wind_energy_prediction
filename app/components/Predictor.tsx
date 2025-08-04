@@ -33,14 +33,14 @@ export function Predictor() {
       const formData = new FormData();
       formData.append('file', selectedFile);
 
-      // const response = await fetch('http://localhost:5000/upload', {
-      //   method: 'POST',
-      //   body: formData
-      // });
-      const response = await fetch('https://dep-wind-ai-twilight-forest-1342.fly.dev', {
+      const response = await fetch('http://localhost:5000/upload', {
         method: 'POST',
         body: formData
       });
+      // const response = await fetch('https://dep-wind-ai-twilight-forest-1342.fly.dev/upload', {
+      //   method: 'POST',
+      //   body: formData
+      // });
 
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
@@ -71,8 +71,12 @@ export function Predictor() {
 
           {
             predicted &&
-            <div>
-              <h2 className={`${fugazOne.className} italic font-bold text-3xl lg:text-[80px] text-white opacity-[0.7]`}> {predicted}</h2>
+            <div className="flex flex-col items-center justify-center">
+              <h1>Predicted Output</h1>
+              {/*<h1>Turbine: Vestas V120</h1>*/}
+              {/*<h2 className={`${fugazOne.className} italic font-bold text-3xl lg:text-[80px] text-white opacity-[0.7]`}> {predicted}</h2>*/}
+              <p>Based on the weather data; you produced</p>
+              <p className={`${fugazOne.className} italic font-bold text-3xl lg:text-[80px] text-white opacity-[0.7]`}>{predicted * 2.2} MW today</p>
             </div>
           }
         </Container>
