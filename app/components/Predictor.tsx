@@ -33,14 +33,14 @@ export function Predictor() {
       const formData = new FormData();
       formData.append('file', selectedFile);
 
-      const response = await fetch('http://localhost:5000/upload', {
-        method: 'POST',
-        body: formData
-      });
-      // const response = await fetch('https://dep-wind-ai-twilight-forest-1342.fly.dev/upload', {
+      // const response = await fetch('http://localhost:5000/upload', {
       //   method: 'POST',
       //   body: formData
       // });
+      const response = await fetch('https://dep-wind-ai-twilight-forest-1342.fly.dev/upload', {
+        method: 'POST',
+        body: formData
+      });
 
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
