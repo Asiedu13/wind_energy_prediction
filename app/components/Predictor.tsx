@@ -16,6 +16,7 @@ export function Predictor() {
       const file = files[0];
       setSelectedFile(event.target.files?.[0] || null);
       console.log(selectedFile);
+      console.log(event.target.files[0])
     }
   };
 
@@ -32,7 +33,11 @@ export function Predictor() {
       const formData = new FormData();
       formData.append('file', selectedFile);
 
-      const response = await fetch('http://localhost:5000/upload', {
+      // const response = await fetch('http://localhost:5000/upload', {
+      //   method: 'POST',
+      //   body: formData
+      // });
+      const response = await fetch('https://dep-wind-ai-twilight-forest-1342.fly.dev', {
         method: 'POST',
         body: formData
       });
