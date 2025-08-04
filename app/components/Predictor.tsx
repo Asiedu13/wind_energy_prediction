@@ -1,19 +1,25 @@
 "use client"
-import { useState } from "react";
+import React, { useState } from "react";
 import { Container } from "./Container";
 import {fugazOne} from "@/app/fonts";
 
 export function Predictor() {
   const [uploading, setUploading] = useState(false);
-  const [selectedFile, setSelectedFile] = useState(null);
+  const [selectedFile, setSelectedFile] = useState<File | null >(null);
   const [predicted, setPredicted] = useState(undefined);
 
-  const handleFileChange = (event) => {
-    setSelectedFile(event.target.files[0]);
-    console.log(selectedFile);
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+
+    const files = event.target.files;
+
+    if (files && files.length > 0) {
+      const file = files[0];
+      setSelectedFile(event.target.files?.[0] || null);
+      console.log(selectedFile);
+    }
   };
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event:React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setUploading(true);
 
@@ -53,7 +59,7 @@ export function Predictor() {
               </header>
               <p>Upload your daily weather data here (.csv file)</p>
               <form onSubmit={handleSubmit}  id="csvForm" encType="multipart/form-data" className="z-10 flex flex-col items-center my-2 ">
-                <input  disabled={uploading} onChange={handleFileChange} type="file" id="csvFile" accept=".csv" className="bg-white border border-2 rounded-md px-2 py-2" required/>
+                <input  disabled={uploading} onChange={(e) => handleFileChange(e)} type="file" id="csvFile" accept=".csv" className="bg-white border border-2 rounded-md px-2 py-2" required/>
                 <button type="submit" disabled={uploading}  className="bg-[#00B0F0] text-white w-full rounded-md py-2 my-5 hover:bg-[#81D83F] transition-all 2s ease-in-out cursor-pointer">Predict</button>
               </form>
           </div>
